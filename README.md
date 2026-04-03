@@ -4,7 +4,7 @@
 
 > An interactive end-to-end machine learning pipeline for predicting healthcare billing amounts — developed and evaluated by Dhiman Kumar, supervised by Dr Fatima Maikore.
 
-[![Live Dashboard](https://img.shields.io/badge/Dashboard-Live-2dd4bf?style=flat-square)](https://your-username.github.io/healthcare-ml-pipeline)
+[![Live Dashboard](https://img.shields.io/badge/Dashboard-Live-2dd4bf?style=flat-square)](https://dimmy98.github.io/healthcare-ml-pipeline)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.4-F7931E?style=flat-square)](https://scikit-learn.org)
 [![Dataset](https://img.shields.io/badge/Dataset-Kaggle-20BEFF?style=flat-square)](https://www.kaggle.com/datasets/awaiskaggler/insurance-csv)
