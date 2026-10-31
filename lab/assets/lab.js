@@ -113,7 +113,7 @@
     });
   }
   function updateScenario() {
-    const x=scenario();$("age-value").textContent=x[0];$("bmi-value").textContent=x[2].toFixed(1);
+    const x=scenario();$("age-value").textContent=x[0];$("bmi-value").textContent=x[2].toFixed(2);
     $("predictions").replaceChildren();
     report.models.forEach((m,i)=>{const box=el("div",undefined,"prediction");box.style.setProperty("--model-color",COLORS[i]);box.append(el("span",m.name),el("strong",money(predict(m,x))),el("small","Back-transformed estimate"));$("predictions").append(box);});
     sensitivity(x);
