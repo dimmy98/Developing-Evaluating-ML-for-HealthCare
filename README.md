@@ -32,7 +32,7 @@ Open `index.html` in any modern browser or visit the GitHub Pages deployment to 
 | Decision Tree (tuned) | 0.8524 | 0.0258 | 0.8216 | 0.0277 |
 | **Gradient Boost ★** | **0.8641** | **0.0238** | **0.8457** | **0.0239** |
 
-**Gradient Boosting** achieved the best overall performance — lowest MSE (0.0238), highest R² (0.8641), and near-perfect generalisation (Train/Test MSE gap of only 0.0001).
+**Gradient Boosting** achieved the best overall performance — lowest MSE (0.0238), highest R² (0.8641), and a train/test MSE gap of 0.0001 in the reported experiment. A small gap on one split does not establish how well a model will generalise to new populations.
 
 ---
 
@@ -41,8 +41,7 @@ Open `index.html` in any modern browser or visit the GitHub Pages deployment to 
 ```
 healthcare-ml-pipeline/
 ├── index.html          # Interactive dashboard (open in browser)
-├── README.md           # This file
-└── pipeline.py         # Python ML pipeline (optional — see below)
+└── README.md           # Project notes and Python reference implementation
 ```
 
 ---
@@ -61,7 +60,7 @@ healthcare-ml-pipeline/
 | `region` | Categorical | US region |
 | `charges` | Target | Medical billing amount → Log₁₀ transformed |
 
-**Records:** 1,338 (after removing 1 duplicate)  
+**Records:** Check the downloaded CSV before and after duplicate removal; the exact count depends on the dataset version.  
 **Split:** 80% training (~1,070) / 20% testing (~268)  
 **Missing values:** None
 
@@ -97,7 +96,7 @@ Data Collection → Pre-processing → Feature Engineering → Model Training �
 - **Test R²:** 0.8641 · **Test MSE:** 0.0238  
 - Sequential ensemble — each tree corrects previous errors  
 - No manual hyperparameter tuning required  
-- Train/Test MSE gap: only **0.0001** — near-perfect generalisation
+- Train/Test MSE gap: **0.0001** in the reported experiment; further validation would be needed to assess generalisation
 
 ---
 
@@ -114,7 +113,9 @@ Data Collection → Pre-processing → Feature Engineering → Model Training �
 
 ---
 
-## 🚀 Running the Python Pipeline
+## 🚀 Python Reference Implementation
+
+The repository contains the dashboard and this README; a standalone \`pipeline.py\` is not included. To try the reference implementation below, save it as \`pipeline.py\`, install the dependencies and supply your own copy of the linked dataset. The historical results above have not been independently reproduced from this snippet.
 
 ```bash
 # Install dependencies
@@ -185,9 +186,9 @@ for name, model in models.items():
 
 ---
 
-## 📄 License
+## 📄 Usage and attribution
 
-This project is submitted as an academic dissertation. Dataset © Kaggle / respective authors.
+This project is presented as an academic dissertation. No software license file is currently included in this repository. Check the dataset source for its separate license and attribution requirements.
 
 ---
 
