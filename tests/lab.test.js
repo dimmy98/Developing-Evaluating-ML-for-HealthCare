@@ -1,0 +1,18 @@
+"use strict";
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const {predictLog, parseCSV, validateCSV} = require("../lab/assets/lab.js");
+const report = JSON.parse(fs.readFileSync("lab/assets/experiment.json", "utf8").replace(/^\uFEFF/, ""));
+assert.deepEqual(parseCSV('age,sex,bmi,smoker\r\n35,"female",28,no\r\n')[1], ["35","female","28","no"]);
+assert.deepEqual(parseCSV('a,b\n"x,y","a""b"')[1], ["x,y",'a"b']);
+assert.throws(()=>parseCSV('a\n"unclosed'), /Unclosed/);
+assert.throws(()=>validateCSV("age,age\n3,4",report.bounds), /Duplicate/);
+assert.throws(()=>validateCSV("age,bmi\n3,4",report.bounds), /Missing/);
+const result = validateCSV("age,sex,bmi,smoker,charges\n35,female,28,no,2000\n35,female,28,no,2000\n35,__proto__,28,no,2000\n35,female,,no,2000\n999,male,25,no,2000\n35,male,Infinity,no,2000\n35,male,25,no,-1",report.bounds);
+assert.equal(result.valid.length,2);
+assert.equal(result.duplicates,1);
+assert.equal(result.invalid,5);
+assert.throws(()=>parseCSV("a\n"+("1\n".repeat(10001))),/10,000/);
+const fixtures=JSON.parse(fs.readFileSync("tests/parity.json","utf8").replace(/^\uFEFF/, ""));
+fixtures.forEach(f=>report.models.forEach((m,i)=>assert.ok(Math.abs(predictLog(m,f.x)-f.expected[i])<1e-10, m.name+" inference mismatch")));
+console.log("CSV validation, quoting, malformed input and "+fixtures.length+" × 3 Python/browser inference comparisons passed.");
